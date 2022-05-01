@@ -4,11 +4,14 @@ import homeimage from "../../assets/Images/home-image.svg";
 import "./homepage.css";
 import { Categories } from "../../components";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function HomePage() {
   return (
     <div>
       <div className="quiz-home-page flex-row">
+        <ToastContainer />
         <div>
           <div className="home-page-title">Memory Nomads</div>
           <h5>Let's play awesome quizzes..</h5>

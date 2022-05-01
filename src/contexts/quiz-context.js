@@ -1,6 +1,7 @@
 import { React, createContext, useContext, useReducer, useEffect } from "react";
 import { quizReducer } from "../reducers";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const quizContext = createContext();
 
@@ -21,7 +22,7 @@ const QuizProvider = ({ children }) => {
           payload: categories,
         });
       } catch (error) {
-        console.log(error);
+        toast(error.message);
       }
     })();
   }, []);
