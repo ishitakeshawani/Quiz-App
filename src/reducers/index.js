@@ -1,0 +1,1 @@
+export { quizReducer } from "./quizReducer";
