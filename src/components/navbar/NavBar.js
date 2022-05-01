@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export function NavBar() {
   return (
     <nav className="navbar semibold-font-weight">
-      <a className="nav-logo nav-link link-no-style" href="">
+      <Link className="nav-logo nav-link link-no-style" to="/">
         MN
-      </a>
+      </Link>
       <a className="nav-link link-no-style" href="">
         Home
       </a>

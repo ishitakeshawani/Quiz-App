@@ -6,7 +6,6 @@ import "./homepage.css";
 export function HomePage() {
   return (
     <div>
-      <NavBar />
       <div className="quiz-home-page flex-row">
         <div>
           <div className="home-page-title">Memory Nomads</div>
@@ -17,7 +16,6 @@ export function HomePage() {
         </div>
         <img src={homeimage} alt="homepage-image" className="homepage-img" />
       </div>
-
       <div className="quiz-categories">
         <h4 className="center-text heading-font">Featured Categories</h4>
         <div className="featured-categories flex-row">
@@ -28,7 +26,6 @@ export function HomePage() {
           <div className="feature-category-item">General Knowledge</div>
         </div>
       </div>
-
       <Footer />
     </div>
   );
