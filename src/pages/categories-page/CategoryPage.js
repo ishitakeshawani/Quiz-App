@@ -1,9 +1,8 @@
 import { React } from "react";
-import deathNote from "../../assets/Images/deathnote.jfif";
 import { Footer } from "../../components";
 import "./categorypage.css";
 import { useQuiz } from "../../contexts";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 export function CategoryPage() {
   const { quizState } = useQuiz();
@@ -36,9 +35,9 @@ export function CategoryPage() {
                       <div className="card-header-title bold-font-weight">
                         {quiz.quizName}
                       </div>
-                      <a href="/Rules/rules.html">
+                      <Link to={`/rules/${quiz.quizName}`}>
                         <button className="btn play-btn">Play now</button>
-                      </a>
+                      </Link>
                     </div>
                     <p className="author-name">{quiz.questions} Questions</p>
                   </div>
