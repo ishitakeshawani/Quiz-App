@@ -15,7 +15,7 @@ export function HomePage() {
         <div>
           <div className="home-page-title">Memory Nomads</div>
           <h5>Let's play awesome quizzes..</h5>
-          <Link to="/">
+          <Link to="/category/All">
             <button className="btn explore-btn">Explore quizzes</button>
           </Link>
         </div>

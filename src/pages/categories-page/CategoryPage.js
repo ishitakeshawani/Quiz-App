@@ -1,46 +1,51 @@
-import React from "react";
+import { React } from "react";
 import deathNote from "../../assets/Images/deathnote.jfif";
 import { Footer } from "../../components";
 import "./categorypage.css";
+import { useQuiz } from "../../contexts";
+import { useParams } from "react-router-dom";
 
 export function CategoryPage() {
+  const { quizState } = useQuiz();
+  const { categoryName } = useParams();
+  const getQuizList = () => {
+    if (categoryName === "All") {
+      return quizState.quizList;
+    }
+    const quizList = quizState.quizList.filter(
+      (quiz) => quiz.categoryName === categoryName
+    );
+    return quizList;
+  };
+
   return (
     <div>
       <div className="quiz-category flex-row">
-        <div className="quiz-category-title">Anime Quizzes</div>
+        <div className="quiz-category-title">{categoryName} Quizzes</div>
         <div className="flex-row quiz-category-list">
-          <div className="card card-box-shadow">
-            <div className="card-section regular-font-weight" id="card-section">
-              <img className="card-img" src={deathNote} alt="" />
-              <div className="card-header">
-                <div className="flex">
-                  <div className="card-header-title bold-font-weight">
-                    Death Note
+          {getQuizList().map((quiz) => {
+            return (
+              <div className="card card-box-shadow">
+                <div
+                  className="card-section regular-font-weight"
+                  id="card-section"
+                >
+                  <img className="card-img" src={quiz.img} alt="quiz photo" />
+                  <div className="card-header">
+                    <div className="card-quiz-name-play-btn">
+                      <div className="card-header-title bold-font-weight">
+                        {quiz.quizName}
+                      </div>
+                      <a href="/Rules/rules.html">
+                        <button className="btn play-btn">Play now</button>
+                      </a>
+                    </div>
+                    <p className="author-name">{quiz.questions} Questions</p>
                   </div>
-                  <a href="/Rules/rules.html">
-                    <button className="btn play-btn">Play now</button>
-                  </a>
                 </div>
-                <p className="author-name">10 Questions</p>
               </div>
-            </div>
-          </div>
-          <div className="card card-box-shadow">
-            <div className="card-section regular-font-weight" id="card-section">
-              <img className="card-img" src={deathNote} alt="" />
-              <div className="card-header">
-                <div className="flex">
-                  <div className="card-header-title bold-font-weight">
-                    Death Note
-                  </div>
-                  <a href="/Rules/rules.html">
-                    <button className="btn play-btn">Play now</button>
-                  </a>
-                </div>
-                <p className="author-name">10 Questions</p>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
       <Footer />
