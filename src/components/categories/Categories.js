@@ -9,7 +9,11 @@ export function Categories() {
     <div className="featured-categories flex-row">
       {categories.map((category) => {
         return (
-          <Link key={category.id} to="/" className="link-no-style">
+          <Link
+            key={category.id}
+            to={`/category/${category.categoryName}`}
+            className="link-no-style"
+          >
             <div className="feature-category-item">{category.categoryName}</div>
           </Link>
         );
