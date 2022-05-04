@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 export function HomePage() {
   return (
     <div>
-      <div className="quiz-home-page flex-row">
+      <div className="quiz-home-page">
         <ToastContainer />
         <div>
           <div className="home-page-title">Memory Nomads</div>

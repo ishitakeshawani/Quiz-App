@@ -1,4 +1,4 @@
-import { React } from "react";
+import React from "react";
 import { Footer } from "../../components";
 import "./categorypage.css";
 import { useQuiz } from "../../contexts";
@@ -24,7 +24,7 @@ export function CategoryPage() {
         <div className="flex-row quiz-category-list">
           {getQuizList().map((quiz) => {
             return (
-              <div className="card card-box-shadow">
+              <div key={quiz._id} className="card card-box-shadow">
                 <div
                   className="card-section regular-font-weight"
                   id="card-section"

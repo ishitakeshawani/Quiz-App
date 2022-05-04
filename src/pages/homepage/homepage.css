@@ -1,5 +1,7 @@
 .quiz-home-page {
-  justify-content: space-around !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .explore-btn {
