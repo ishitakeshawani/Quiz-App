@@ -7,6 +7,11 @@ import { getAllCategoriesHandler } from "./backend/controllers/CategoryControlle
 import { users } from "./backend/db/users";
 import { initialUserData } from "./backend/utils/authUtils";
 import { categories } from "./backend/db/categories";
+import {
+  getQuizHandler,
+  getAllQuizzesHandler,
+} from "./backend/controllers/QuizController";
+import { quizzes } from "./backend/db/quizzes";
 
 export function makeServer({ environment = "development" } = {}) {
   let server = new Server({
@@ -17,6 +22,7 @@ export function makeServer({ environment = "development" } = {}) {
     models: {
       user: Model,
       category: Model,
+      quiz: Model,
     },
 
     // Runs on the start of the server
@@ -27,6 +33,9 @@ export function makeServer({ environment = "development" } = {}) {
           ...initialUserData,
         })
       );
+
+      quizzes.forEach((item) => server.create("quiz", { ...item }));
+
       categories.forEach((item) => server.create("category", { ...item }));
     },
 
@@ -35,6 +44,10 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
+      // quizzes routes (public)
+      this.get("/quizzes", getAllQuizzesHandler.bind(this));
+      this.get("/quizzes/:quizId", getQuizHandler.bind(this));
+
       //categories routes(public)
       this.get("/categories", getAllCategoriesHandler.bind(this));
     },

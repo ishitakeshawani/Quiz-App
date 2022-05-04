@@ -8,7 +8,24 @@ const quizContext = createContext();
 const QuizProvider = ({ children }) => {
   const initialState = {
     categories: [],
+    quizList: [],
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { quizzes },
+        } = await axios.get("/api/quizzes");
+        dispatch({
+          type: "SET_QUIZZES",
+          payload: quizzes,
+        });
+      } catch (error) {
+        toast(error.message);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     (async () => {

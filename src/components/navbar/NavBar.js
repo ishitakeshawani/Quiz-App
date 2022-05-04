@@ -7,9 +7,9 @@ export function NavBar() {
       <Link className="nav-logo nav-link link-no-style" to="/">
         MN
       </Link>
-      <a className="nav-link link-no-style" href="">
+      <Link className="nav-link link-no-style" to="/">
         Home
-      </a>
+      </Link>
       <div className="nav-last-items">
         <a href="http://" className="link-no-style nav-link nav-icon-link">
           Login
