@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuiz } from "../../contexts";
 
 export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
@@ -6,6 +6,7 @@ export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
   const { quizState, dispatch } = useQuiz();
   const quiz = quizState.quizList.filter((quiz) => quiz.quizName == quizName);
   const quizId = quiz.length > 0 && quiz[0]._id;
+  const navigate = useNavigate();
 
   const handleOptionClick = (
     id,
@@ -65,7 +66,13 @@ export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
             </div>
           ))}
       </div>
-      <div className="back-next-link flex-row">
+      <div className="back-next-link">
+        <button
+          className="btn link-no-style goback-link"
+          onClick={() => navigate("/category/All")}
+        >
+          Quit <i class="fa-solid fa-xmark ml-1"></i>
+        </button>
         <button
           className="btn link-no-style next-link"
           onClick={() => nextQuestion()}

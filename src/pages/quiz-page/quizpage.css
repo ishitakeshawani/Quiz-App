@@ -59,7 +59,8 @@
 
 .back-next-link {
   width: 68%;
-  justify-content: flex-end !important;
+  display: flex;
+  justify-content: space-between;
 }
 
 .goback-link,
@@ -71,6 +72,12 @@
   width: 21%;
   text-align: center;
 }
+
+.goback-link{
+  background: var(--red);
+  color: var(--white);
+}
+
 
 .goback-link:hover,
 .next-link:hover {
