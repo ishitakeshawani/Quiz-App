@@ -9,6 +9,7 @@ const QuizProvider = ({ children }) => {
   const initialState = {
     categories: [],
     quizList: [],
+    currentQuestionIndex: 0
   };
 
   useEffect(() => {
