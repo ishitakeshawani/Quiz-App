@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Footer } from "../../components";
 import { useQuiz } from "../../contexts";
 import "./quizpage.css";
@@ -7,7 +7,9 @@ import "./quizpage.css";
 export function QuizPage() {
   const { quizName } = useParams();
   const { quizState } = useQuiz();
+
   const quiz = quizState.quizList.filter((quiz) => quiz.quizName == quizName);
+
   const score = quiz.length > 0 && quiz[0].score;
   const questionsList = quiz.length > 0 && quiz[0].questionsList;
   const currentQuestionIndex = quizState.currentQuestionIndex;
@@ -18,7 +20,9 @@ export function QuizPage() {
         <div className="questions-page-title">{quizName}</div>
         <div className="question flex-col">
           <div className="questions-number-score flex-row">
-            <div>Questions : {currentQuestionIndex + 1}/{questionsList.length}</div>
+            <div>
+              Questions : {currentQuestionIndex + 1}/{questionsList.length}
+            </div>
             <div className="score">Score: {score}</div>
           </div>
           <CurrentQuestion
@@ -36,8 +40,9 @@ const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
   const { quizName } = useParams();
   const { dispatch } = useQuiz();
   const { quizState } = useQuiz();
-  const quiz = quizState.quizList.filter((quiz) => quiz.quizName == quizName);
+  const quiz = quizState.quizList.filter((quiz) => quiz?.quizName == quizName);
   const quizId = quiz.length > 0 && quiz[0]._id;
+  let navigate = useNavigate();
 
   const handleOptionClick = (
     id,
@@ -67,6 +72,8 @@ const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
         type: "SET_CURRENT_QUESTION_INDEX",
         payload: currentQuestionIndex + 1,
       });
+    } else if (currentQuestionIndex === questionsList.length - 1) {
+      navigate(`/result/${quizName}`);
     }
   };
   return (
@@ -79,7 +86,7 @@ const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
         {questionsList.length > 0 &&
           questionsList[currentQuestionIndex].options.map((opt) => (
             <div
-            key={opt._id}
+              key={opt._id}
               className={`option ${
                 opt.isSelected && opt.isCorrect ? "right-ans" : ""
               } ${opt.isSelected && !opt.isCorrect ? "wrong-ans" : ""} `}

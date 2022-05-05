@@ -1,3 +1,5 @@
+import { quizzes } from "../backend/db/quizzes";
+
 export const quizReducer = (quizState, { type, payload }) => {
   switch (type) {
     case "SET_CATEGORY":
@@ -33,6 +35,14 @@ export const quizReducer = (quizState, { type, payload }) => {
             : quiz
         ),
       };
+
+    case "RESET_QUIZ": {
+      return {
+        ...quizState,
+        quizList: quizzes,
+        currentQuestionIndex: 0
+      };
+    }
 
     default:
       return quizState;
