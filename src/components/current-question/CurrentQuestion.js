@@ -3,8 +3,7 @@ import { useQuiz } from "../../contexts";
 
 export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
   const { quizName } = useParams();
-  const { dispatch } = useQuiz();
-  const { quizState } = useQuiz();
+  const { quizState, dispatch } = useQuiz();
   const quiz = quizState.quizList.filter((quiz) => quiz.quizName == quizName);
   const quizId = quiz.length > 0 && quiz[0]._id;
 

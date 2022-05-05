@@ -9,6 +9,8 @@ export const quizReducer = (quizState, { type, payload }) => {
     case "SET_CURRENT_QUESTION_INDEX":
       return { ...quizState, currentQuestionIndex: payload };
 
+    // This is for set option which is selected by user.
+    // Here will find quiz,question and it's option then will set isSeelected to true.
     case "SET_SELECTED_OPTION":
       return {
         ...quizState,
@@ -35,6 +37,6 @@ export const quizReducer = (quizState, { type, payload }) => {
       };
 
     default:
-      return quizState;
+      throw new Error(`${type} action type not found.`);
   }
 };
