@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Footer } from "../../components";
 import { useQuiz } from "../../contexts";
 import "./quizpage.css";
@@ -8,7 +8,9 @@ import { CurrentQuestion } from "../../components";
 export function QuizPage() {
   const { quizName } = useParams();
   const { quizState } = useQuiz();
+
   const quiz = quizState.quizList.filter((quiz) => quiz.quizName == quizName);
+
   const score = quiz.length > 0 && quiz[0].score;
   const questionsList = quiz.length > 0 && quiz[0].questionsList;
   const currentQuestionIndex = quizState.currentQuestionIndex;

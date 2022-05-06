@@ -152,7 +152,7 @@ export const quizzes = [
           },
           {
             option: "13",
-            isCorrect: true,
+            isCorrect: false,
             _id: uuid(),
             isSelected: false,
           },
@@ -236,13 +236,13 @@ export const quizzes = [
           },
           {
             option: "5",
-            isCorrect: true,
+            isCorrect: false,
             _id: uuid(),
             isSelected: false,
           },
           {
             option: "7",
-            isCorrect: true,
+            isCorrect: false,
             _id: uuid(),
             isSelected: false,
           },
