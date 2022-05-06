@@ -46,12 +46,25 @@ Memory Nomads is an online quiz web application. Which have three different type
 
 ## Folder Structure 📒
 <pre>
-  ├───assets
-  ├───Category
-  ├───Homepage
-  ├───Questionspage
-  ├───Resultpage
-  └───Rules
+├───assets
+│   └───Images
+├───backend
+│   ├───controllers
+│   ├───db
+│   └───utils
+├───components
+│   ├───categories
+│   ├───current-question
+│   ├───footer
+│   └───navbar
+├───contexts
+├───pages
+│   ├───categories-page
+│   ├───homepage
+│   ├───quiz-page
+│   ├───result-page
+│   └───rules-page
+└───reducers
 </pre>
   <br />
 
