@@ -36,6 +36,8 @@ export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
         type: "SET_CURRENT_QUESTION_INDEX",
         payload: currentQuestionIndex + 1,
       });
+    } else if (currentQuestionIndex === questionsList.length - 1) {
+      navigate(`/result/${quizName}`);
     }
   };
   return (
@@ -69,13 +71,20 @@ export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
       <div className="back-next-link">
         <button
           className="btn link-no-style goback-link"
-          onClick={() => navigate("/category/All")}
+          onClick={() => {
+            navigate("/category/All");
+            dispatch({
+              type: "RESET_QUIZ",
+            });
+          }}
         >
           Quit <i class="fa-solid fa-xmark ml-1"></i>
         </button>
         <button
           className="btn link-no-style next-link"
-          onClick={() => nextQuestion()}
+          onClick={() => {
+            nextQuestion();
+          }}
         >
           next <i className="fa fa-arrow-right ml-1"></i>
         </button>
