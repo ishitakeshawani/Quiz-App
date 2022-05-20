@@ -91,7 +91,9 @@ $ cd Quiz-App
 ```
 - Start LocalHost Server
 ```
-Open index.html with Live Server in VScode
+npm install
+npm run start
+
 ```
   <br />
   
