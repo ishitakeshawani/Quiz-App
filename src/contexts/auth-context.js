@@ -2,7 +2,7 @@ import { React, useContext, createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
 
-const authContext = createContext();
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState();
@@ -26,14 +26,14 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <authContext.Provider
+    <AuthContext.Provider
       value={{ user, setUser, encodedToken, isLoggedIn, setIsLoggedIn, logOut }}
     >
       {children}
-    </authContext.Provider>
+    </AuthContext.Provider>
   );
 };
 
-const useAuth = () => useContext(authContext);
+const useAuth = () => useContext(AuthContext);
 
 export { useAuth, AuthProvider };

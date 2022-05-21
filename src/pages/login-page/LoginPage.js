@@ -29,11 +29,7 @@ export function LoginPage() {
     } else {
       setError("");
     }
-    if (
-      userData.password === "" ||
-      userData.password === undefined ||
-      userData.password === null
-    ) {
+    if (!userData.password) {
       setPasswordError("Please enter password!");
       return false;
     } else {
@@ -76,8 +72,16 @@ export function LoginPage() {
         navigate("/");
       }
     } catch (e) {
-      const notify = () => toast(e.message);
-      notify();
+      if (e.response.status === 401) {
+        const notify = () => toast("The credentials you entered are invalid");
+        notify();
+      } else if (e.response.status === 404) {
+        const notify = () => toast("The email you entered is not Registered");
+        notify();
+      } else {
+        const notify = () => toast(e.message);
+        notify();
+      }
     }
   };
 
