@@ -117,7 +117,7 @@ export function LoginPage() {
           </div>
           <div className="login-password">
             <input
-              type="password"
+              type={type}
               className="login-password-input"
               value={userData.password}
               placeholder="password"

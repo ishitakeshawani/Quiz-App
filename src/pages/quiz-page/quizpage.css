@@ -1,5 +1,6 @@
 .questions-page {
   margin: 5rem 2rem 2rem 2rem;
+  height: 70vh;
 }
 
 .questions-page-title {
@@ -73,11 +74,10 @@
   text-align: center;
 }
 
-.goback-link{
+.goback-link {
   background: var(--red);
   color: var(--white);
 }
-
 
 .goback-link:hover,
 .next-link:hover {
@@ -111,5 +111,11 @@
 
   .back-next-link {
     column-gap: 1rem;
+  }
+}
+
+@media only screen and (min-height: 56em) and (max-height: 118em) {
+  .questions-page {
+    height: 100vh;
   }
 }

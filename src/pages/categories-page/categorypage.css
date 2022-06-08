@@ -1,6 +1,7 @@
 .quiz-category {
   flex-direction: column;
   margin: 3rem 2rem 2rem 2rem;
+  height: 70vh;
 }
 
 .quiz-category-title {
@@ -38,7 +39,7 @@
   margin: 0.6rem 0.6rem 0.6rem 1rem;
 }
 
-.card a:hover{
+.card a:hover {
   background: none;
 }
 
@@ -68,5 +69,11 @@
   .flex {
     align-items: center;
     justify-content: center;
+  }
+}
+
+@media only screen and (min-height: 56em) and (max-height: 118em) {
+  .quiz-category {
+    height: 100vh;
   }
 }
