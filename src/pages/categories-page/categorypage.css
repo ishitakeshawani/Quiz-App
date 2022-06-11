@@ -1,7 +1,6 @@
 .quiz-category {
   flex-direction: column;
   margin: 3rem 2rem 2rem 2rem;
-  height: 70vh;
 }
 
 .quiz-category-title {

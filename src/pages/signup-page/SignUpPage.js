@@ -6,8 +6,11 @@ import axios from "axios";
 import { useAuth } from "../../contexts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setDocumentTitle } from "../../hooks";
 
 export function SignUpPage() {
+  setDocumentTitle("Memory Nomads | Signup");
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",

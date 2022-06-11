@@ -48,7 +48,7 @@ export const CurrentQuestion = ({ questionsList, currentQuestionIndex }) => {
       </div>
       <div className="quiz-options flex-col">
         {questionsList.length > 0 &&
-          questionsList[currentQuestionIndex].options.map((opt) => (
+          questionsList[currentQuestionIndex]?.options?.map((opt) => (
             <div
               key={opt._id}
               className={`option ${

@@ -4,6 +4,7 @@ import { Footer } from "../../components";
 import { useQuiz } from "../../contexts";
 import "./quizpage.css";
 import { CurrentQuestion } from "../../components";
+import { setDocumentTitle } from "../../hooks";
 
 export function QuizPage() {
   const { quizName } = useParams();
@@ -14,7 +15,7 @@ export function QuizPage() {
   const score = quiz.length > 0 && quiz[0].score;
   const questionsList = quiz.length > 0 && quiz[0].questionsList;
   const currentQuestionIndex = quizState.currentQuestionIndex;
-
+  setDocumentTitle("Memory Nomads | Quiz");
   return (
     <div>
       <div className="questions-page flex-col">

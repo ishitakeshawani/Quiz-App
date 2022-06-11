@@ -6,8 +6,10 @@ import { Categories } from "../../components";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setDocumentTitle } from "../../hooks";
 
 export function HomePage() {
+  setDocumentTitle("Memory Nomads | Home");
   return (
     <div>
       <div className="quiz-home-page">
