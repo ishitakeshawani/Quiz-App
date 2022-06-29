@@ -86,3 +86,9 @@
     width: 12rem;
   }
 }
+
+@media only screen and (min-height: 56em) and (max-height: 118em) {
+  .quiz-home-page {
+    height: 100vh;
+  }
+}

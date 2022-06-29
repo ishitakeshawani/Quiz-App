@@ -4,8 +4,10 @@ import { Footer } from "../../components";
 import { useParams } from "react-router-dom";
 import { useQuiz } from "../../contexts";
 import { Link } from "react-router-dom";
+import { setDocumentTitle } from "../../hooks";
 
 export function ResultPage() {
+  setDocumentTitle("Memory Nomads | Result");
   const { quizName } = useParams();
   const { quizState, dispatch } = useQuiz();
   const quiz = quizState.quizList.filter((quiz) => quiz.quizName === quizName);

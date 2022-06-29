@@ -2,8 +2,10 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { Footer } from "../../components";
 import "./rulespage.css";
+import { setDocumentTitle } from "../../hooks";
 
 export function RulesPage() {
+  setDocumentTitle("Memory Nomads | Rules");
   const { quizName } = useParams();
   return (
     <div>

@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import bcyrpt from "bcryptjs";
+import { setDocumentTitle } from "../../hooks";
 
 export function LoginPage() {
   const [type, setType] = useState("password");
@@ -17,6 +18,7 @@ export function LoginPage() {
   const { setUser, setIsLoggedIn } = useAuth();
   const [error, setError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  setDocumentTitle("Memory Nomads | Login");
 
   const doValidate = () => {
     if (
@@ -117,7 +119,7 @@ export function LoginPage() {
           </div>
           <div className="login-password">
             <input
-              type="password"
+              type={type}
               className="login-password-input"
               value={userData.password}
               placeholder="password"

@@ -3,8 +3,10 @@ import { Footer } from "../../components";
 import "./categorypage.css";
 import { useQuiz } from "../../contexts";
 import { useParams, Link } from "react-router-dom";
+import { setDocumentTitle } from "../../hooks";
 
 export function CategoryPage() {
+  setDocumentTitle("Memory Nomads | Categories");
   const { quizState } = useQuiz();
   const { categoryName } = useParams();
   const getQuizList = () => {

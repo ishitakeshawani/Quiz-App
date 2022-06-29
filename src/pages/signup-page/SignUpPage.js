@@ -6,8 +6,11 @@ import axios from "axios";
 import { useAuth } from "../../contexts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setDocumentTitle } from "../../hooks";
 
 export function SignUpPage() {
+  setDocumentTitle("Memory Nomads | Signup");
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -135,7 +138,7 @@ export function SignUpPage() {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <div>
-            <label for="" className="login-label" id="password">
+            <label for="password" className="login-label" id="password">
               Password
             </label>
           </div>

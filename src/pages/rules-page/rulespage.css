@@ -1,6 +1,7 @@
 .quiz-rule-page {
   flex-direction: column;
   margin: 5rem 0 0 0;
+  height: 70vh;
 }
 
 .quiz-rule-title {
@@ -42,5 +43,11 @@
   }
   .quiz-rule-title {
     font-size: 1.5rem;
+  }
+}
+
+@media only screen and (min-height: 56em) and (max-height: 118em) {
+  .quiz-rule-page {
+    height: 100vh;
   }
 }
