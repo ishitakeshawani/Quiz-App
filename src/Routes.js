@@ -6,8 +6,8 @@ import {
   QuizPage,
   RulesPage,
   ResultPage,
-  SignUpPage,
   LoginPage,
+  SignUpPage,
 } from "./pages";
 import { RequireAuth } from "./RequireAuth";
 import { useAuth } from "./contexts";

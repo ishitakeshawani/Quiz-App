@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import "./signup.css";
 import "../login-page/loginpage.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,20 +10,27 @@ import { setDocumentTitle } from "../../hooks";
 
 export function SignUpPage() {
   setDocumentTitle("Memory Nomads | Signup");
+  type UserData = {
+    email: string,
+    password: string,
+    confirmPassword: string,
+    firstName: string,
+    lastName: string,
+  };
 
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<UserData>({
     email: "",
     password: "",
     confirmPassword: "",
     firstName: "",
     lastName: "",
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
   const { setIsLoggedIn } = useAuth();
   let navigate = useNavigate();
-  const [type, setType] = useState("password");
-  const [confirmPasswordType, setConfirmPasswordType] = useState("password");
-  const [passwordError, setPasswordError] = useState("");
+  const [type, setType] = useState<string>("password");
+  const [confirmPasswordType, setConfirmPasswordType] = useState<string>("password");
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const doValidate = () => {
     if (
@@ -45,13 +52,17 @@ export function SignUpPage() {
     return true;
   };
 
-  const onHandleSubmit = async (e) => {
+  const onHandleSubmit = async (e: React.MouseEvent) => {
     try {
       if (doValidate()) {
         e.preventDefault();
         const value = await axios.post("/api/auth/signup", userData);
         localStorage.setItem("token", value.data.encodedToken);
         localStorage.setItem("user", JSON.stringify(userData));
+        if (value.status === 422) {
+          const notify = () => toast("Email already exist! Please do login");
+          notify();
+        }
         setIsLoggedIn(true);
         toast("Sucessfully made an accoun!");
         setUserData({
@@ -64,13 +75,8 @@ export function SignUpPage() {
         navigate("/");
       }
     } catch (e) {
-      if (e.response.status === 422) {
-        const notify = () => toast("Email already exist! Please do login");
-        notify();
-      } else {
-        const notify = () => toast(e.message);
-        notify();
-      }
+      const notify = () => toast("Something went wrong");
+      notify();
     }
   };
 
@@ -80,9 +86,8 @@ export function SignUpPage() {
       <div className="login-page m-10">
         <div className="signup">
           <h4 className="login-title">Signup</h4>
-
           <div className="login-label">
-            <label for="" id="firstname">
+            <label htmlFor="name" id="firstname">
               First Name
             </label>
           </div>
@@ -100,13 +105,13 @@ export function SignUpPage() {
             }
           />
           <div className="login-label">
-            <label for="" id="lastname">
+            <label htmlFor="lastname" id="lastname">
               Last Name
             </label>
           </div>
           <input
             type="text"
-            class="login-input"
+            className="login-input"
             value={userData.lastName}
             placeholder="Keshawani"
             required
@@ -119,7 +124,7 @@ export function SignUpPage() {
           />
 
           <div className="login-label">
-            <label for="" id="email">
+            <label htmlFor="email" id="email">
               Email address
             </label>
           </div>
@@ -138,11 +143,11 @@ export function SignUpPage() {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <div>
-            <label for="password" className="login-label" id="password">
+            <label htmlFor="password" className="login-label" id="password">
               Password
             </label>
           </div>
-          <div class="login-password">
+          <div className="login-password">
             <input
               type={type}
               className="login-password-input"
@@ -168,7 +173,7 @@ export function SignUpPage() {
           </div>
 
           <div>
-            <label for="" className="login-label" id="confirmpassword">
+            <label htmlFor="confirmpassword" className="login-label" id="confirmpassword">
               Confirm Password
             </label>
           </div>
