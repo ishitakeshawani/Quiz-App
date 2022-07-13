@@ -1,4 +1,3 @@
-import React from "react";
 import { Footer } from "../../components";
 import homeimage from "../../assets/Images/home-image.svg";
 import "./homepage.css";

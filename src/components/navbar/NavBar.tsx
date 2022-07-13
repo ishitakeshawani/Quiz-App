@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts";
 
@@ -14,7 +13,7 @@ export function NavBar() {
       </Link>
       <div className="nav-last-items">
         <Link
-          to={!isLoggedIn && `/login`}
+          to={isLoggedIn === false ? `/login` : ""}
           className="link-no-style nav-link nav-icon-link"
           onClick={() => isLoggedIn && logOut()}
         >

@@ -1,30 +1,55 @@
-import React from "react";
 import { Footer } from "../../components";
 import "./categorypage.css";
 import { useQuiz } from "../../contexts";
 import { useParams, Link } from "react-router-dom";
 import { setDocumentTitle } from "../../hooks";
+import { Quiz } from "../../contexts/Quiz.type";
+import { useEffect } from "react";
+import axios from "axios";
+import { categories } from "../../backend/db/categories";
 
 export function CategoryPage() {
   setDocumentTitle("Memory Nomads | Categories");
-  const { quizState } = useQuiz();
+  const { quizState, dispatch } = useQuiz();
   const { categoryName } = useParams();
+  const categoryId = categories.find((category) => category)
+  console.log(categoryId)
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const {
+          data: { category },
+        } = await axios.get("/api/user/category/:categoryId");
+        console.log(category)
+        // dispatch({
+        //   type: "SET_CATEGORY",
+        //   payload: { categories: categories },
+        // });
+      } catch (error) {
+        // toast(error.message);
+      }
+    })();
+  }, []);
+
   const getQuizList = () => {
     if (categoryName === "All") {
-      return quizState.quizList;
+      return quizState?.quizList;
     }
     const quizList = quizState.quizList.filter(
-      (quiz) => quiz.categoryName === categoryName
+      (quiz: Quiz) => quiz.categoryName === categoryName
     );
     return quizList;
   };
+
+
 
   return (
     <div>
       <div className="quiz-category flex-row">
         <div className="quiz-category-title">{categoryName} Quizzes</div>
         <div className="flex-row quiz-category-list">
-          {getQuizList().map((quiz) => {
+          {getQuizList().map((quiz: Quiz) => {
             return (
               <div key={quiz._id} className="card card-box-shadow">
                 <div
