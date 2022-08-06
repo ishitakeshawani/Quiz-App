@@ -4,17 +4,20 @@ import { useQuiz } from "../../contexts";
 import { useParams, Link } from "react-router-dom";
 import { setDocumentTitle } from "../../hooks";
 import { Quiz } from "../../contexts/Quiz.type";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast,ToastContainer } from "react-toastify";
+import * as Mui from "@material-ui/core";
 
 export function CategoryPage() {
+  const [isLoading, setIsloading] = useState(false);
   setDocumentTitle("Memory Nomads | Categories");
   const { quizState, dispatch } = useQuiz();
   const { categoryName } = useParams();
 
   useEffect(() => {
     (async () => {
+      setIsloading(true)
       try {
         const {
           data: { quizzes },
@@ -23,6 +26,7 @@ export function CategoryPage() {
           type: "SET_QUIZZES",
           payload: {quizList: quizzes},
         });
+        setIsloading(false)
       } catch (error) {
          toast("Something went wrong.");
       }
@@ -47,7 +51,12 @@ export function CategoryPage() {
       <div className="quiz-category flex-row">
         <div className="quiz-category-title">{categoryName} Quizzes</div>
         <div className="flex-row quiz-category-list">
-          {getQuizList().map((quiz: Quiz) => {
+        {isLoading && (
+              <Mui.Grid container justify="center">
+                <Mui.CircularProgress />
+              </Mui.Grid>
+            )}
+            {getQuizList().map((quiz: Quiz) => {
             return (
               <div key={quiz._id} className="card card-box-shadow">
                 <div

@@ -1,15 +1,18 @@
 import { useQuiz } from "../../contexts";
 import { Link } from "react-router-dom";
 import { Category } from "./Category.type";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
-import { toast,ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import * as Mui from "@material-ui/core";
 
 export function Categories() {
   const { quizState,dispatch } = useQuiz();
+  const [isLoading, setIsloading] = useState(false);
   const categories = quizState?.categories;
   useEffect(() => {
     (async () => {
+      setIsloading(true)
       try {
         const {
           data: { categories },
@@ -18,6 +21,7 @@ export function Categories() {
           type: "SET_CATEGORY",
           payload: { categories: categories },
         });
+        setIsloading(false)
       } catch (error) {
         toast("Something went wrong.");
       }
@@ -25,6 +29,12 @@ export function Categories() {
   }, []);
   
   return (
+    <div>
+    {isLoading &&  (
+      <Mui.Grid container justify="center">
+        <Mui.CircularProgress />
+      </Mui.Grid>
+    )}
     <div className="featured-categories flex-row">
       {categories?.map((category: Category) => {
         return (
@@ -37,6 +47,7 @@ export function Categories() {
           </Link>
         );
       })}
+    </div>
     </div>
   );
 }
