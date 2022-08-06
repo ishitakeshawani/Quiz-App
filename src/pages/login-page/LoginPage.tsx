@@ -1,23 +1,28 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import "./loginpage.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../contexts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import bcyrpt from "bcryptjs";
 import { setDocumentTitle } from "../../hooks";
 
 export function LoginPage() {
+  type UserData = {
+    email: string,
+    password: string,
+  };
   const [type, setType] = useState("password");
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-  });
+  const [userData, setUserData] =
+    useState<UserData>(
+      {
+        email: "",
+        password: "",
+      });
   let navigate = useNavigate();
   const { setUser, setIsLoggedIn } = useAuth();
-  const [error, setError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
   setDocumentTitle("Memory Nomads | Login");
 
   const doValidate = () => {
@@ -40,11 +45,11 @@ export function LoginPage() {
     return true;
   };
 
-  const testLogin = async (e) => {
+  const testLogin = async (e: React.MouseEvent) => {
     e.preventDefault();
     setUserData((prev) => ({
       email: "adarshbalika@gmail.com",
-      password: bcyrpt.hashSync("adarshBalika123", 5),
+      password: "adarshBalika123",
     }));
     const value = await axios.post("/api/auth/login", {
       email: "adarshbalika@gmail.com",
@@ -60,12 +65,19 @@ export function LoginPage() {
     navigate("/");
   };
 
-  const onSubmitHandler = async (e) => {
+  const onSubmitHandler = async (e: React.MouseEvent) => {
     try {
       if (doValidate()) {
         e.preventDefault();
         const value = await axios.post("/api/auth/login", userData);
         setUser(value.data.foundUser);
+        if (value.status == 401) {
+          const notify = () => toast("The credentials you entered are invalid");
+          notify();
+        } else if (value.status === 404) {
+          const notify = () => toast("The email you entered is not Registered");
+          notify();
+        }
         localStorage.setItem("token", value.data.encodedToken);
         setUserData({
           email: "",
@@ -74,16 +86,8 @@ export function LoginPage() {
         navigate("/");
       }
     } catch (e) {
-      if (e.response.status === 401) {
-        const notify = () => toast("The credentials you entered are invalid");
-        notify();
-      } else if (e.response.status === 404) {
-        const notify = () => toast("The email you entered is not Registered");
-        notify();
-      } else {
-        const notify = () => toast(e.message);
-        notify();
-      }
+      const notify = () => toast("Something went wrong");
+      notify();
     }
   };
 
@@ -94,7 +98,7 @@ export function LoginPage() {
         <div className="login">
           <h4 className="login-title">Login</h4>
           <div className="login-label">
-            <label for="" id="email">
+            <label htmlFor="email" id="email">
               Email address
             </label>
           </div>
@@ -113,7 +117,7 @@ export function LoginPage() {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
           <div>
-            <label for="" class="login-label" id="password">
+            <label htmlFor="password" className="login-label" id="password">
               Password
             </label>
           </div>
@@ -145,14 +149,14 @@ export function LoginPage() {
           <button
             type="submit"
             className="btn btn-login"
-            onClick={(e) => onSubmitHandler(e)}
+            onClick={(e: React.MouseEvent) => onSubmitHandler(e)}
           >
             Login
           </button>
           <button
             type="submit"
             className="btn btn-login"
-            onClick={(e) => testLogin(e)}
+            onClick={(e: React.MouseEvent) => testLogin(e)}
           >
             Login with test credentials
           </button>

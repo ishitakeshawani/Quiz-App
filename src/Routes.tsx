@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
   CategoryPage,
@@ -6,8 +5,8 @@ import {
   QuizPage,
   RulesPage,
   ResultPage,
-  SignUpPage,
   LoginPage,
+  SignUpPage,
 } from "./pages";
 import { RequireAuth } from "./RequireAuth";
 import { useAuth } from "./contexts";
