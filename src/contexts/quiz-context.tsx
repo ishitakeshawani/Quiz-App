@@ -1,7 +1,6 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { quizReducer } from "../reducers";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { ContextType, InitialStateType, QuizProviderProps } from "./QuizContext.type";
 
 export const initialState: InitialStateType = {
@@ -16,26 +15,6 @@ const quizContext = createContext<ContextType>({
 });
 
 const QuizProvider = ({ children }: QuizProviderProps) => {
-
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const {
-          data: { quizzes },
-        } = await axios.get("/api/quizzes");
-        console.log(quizzes)
-        dispatch({
-          type: "SET_QUIZZES",
-          payload: quizzes,
-        });
-      } catch (error) {
-        // toast(error.message);
-      }
-    })();
-  }, []);
-
-
 
   const [quizState, dispatch] = useReducer(quizReducer, initialState);
   return (

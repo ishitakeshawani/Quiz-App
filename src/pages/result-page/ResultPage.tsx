@@ -5,6 +5,7 @@ import { useQuiz } from "../../contexts";
 import { Link } from "react-router-dom";
 import { setDocumentTitle } from "../../hooks";
 import { Option, Question, Quiz } from "../../contexts/Quiz.type";
+import { nanoid } from 'nanoid'
 
 export function ResultPage() {
   setDocumentTitle("Memory Nomads | Result");
@@ -42,13 +43,13 @@ export function ResultPage() {
         <div className="questions flex-col">
           {questions?.map((question: Question, index: number) => {
             return (
-              <div className="questions flex-col">
+              <div key={nanoid()} className="questions flex-col">
                 <div className="question-name">
                   {index + 1}.{question.question}
                 </div>
                 <div className="options">
                   {question.options.map((option: Option) => (
-                    <div
+                    <div key={nanoid()}
                       className={`option ${option.isCorrect ? "right-ans" : ""
                         } ${option.isSelected && !option.isCorrect
                           ? "wrong-ans"

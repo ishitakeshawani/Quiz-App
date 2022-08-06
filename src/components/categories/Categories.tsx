@@ -1,34 +1,32 @@
 import { useQuiz } from "../../contexts";
 import { Link } from "react-router-dom";
 import { Category } from "./Category.type";
-import { ContextType } from "../../contexts/QuizContext.type";
 import { useEffect } from "react";
 import axios from "axios";
+import { toast,ToastContainer } from "react-toastify";
 
 export function Categories() {
   const { quizState,dispatch } = useQuiz();
-  console.log(quizState)
-  const categories = quizState.categories;
+  const categories = quizState?.categories;
   useEffect(() => {
     (async () => {
       try {
         const {
           data: { categories },
-        } = await axios.get("/api/user/categories");
-        console.log(categories,"mn")
+        } = await axios.get("/api/categories");
         dispatch({
           type: "SET_CATEGORY",
           payload: { categories: categories },
         });
       } catch (error) {
-        // toast(error.message);
+        toast("Something went wrong.");
       }
     })();
   }, []);
   
   return (
     <div className="featured-categories flex-row">
-      {categories.map((category: Category) => {
+      {categories?.map((category: Category) => {
         return (
           <Link
             key={category._id}

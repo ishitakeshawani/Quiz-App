@@ -6,28 +6,25 @@ import { setDocumentTitle } from "../../hooks";
 import { Quiz } from "../../contexts/Quiz.type";
 import { useEffect } from "react";
 import axios from "axios";
-import { categories } from "../../backend/db/categories";
+import { toast,ToastContainer } from "react-toastify";
 
 export function CategoryPage() {
   setDocumentTitle("Memory Nomads | Categories");
   const { quizState, dispatch } = useQuiz();
   const { categoryName } = useParams();
-  const categoryId = categories.find((category) => category)
-  console.log(categoryId)
 
   useEffect(() => {
     (async () => {
       try {
         const {
-          data: { category },
-        } = await axios.get("/api/user/category/:categoryId");
-        console.log(category)
-        // dispatch({
-        //   type: "SET_CATEGORY",
-        //   payload: { categories: categories },
-        // });
+          data: { quizzes },
+        } = await axios.get("/api/quizzes");
+        dispatch({
+          type: "SET_QUIZZES",
+          payload: {quizList: quizzes},
+        });
       } catch (error) {
-        // toast(error.message);
+         toast("Something went wrong.");
       }
     })();
   }, []);
@@ -46,6 +43,7 @@ export function CategoryPage() {
 
   return (
     <div>
+      <ToastContainer />
       <div className="quiz-category flex-row">
         <div className="quiz-category-title">{categoryName} Quizzes</div>
         <div className="flex-row quiz-category-list">
